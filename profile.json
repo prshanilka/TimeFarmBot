@@ -1,0 +1,21 @@
+{
+  "main": {
+    "headers": {
+      "accept": "*/*",
+      "accept-language": "en,en-GB;q=0.9,en-US;q=0.8",
+      "authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTg1NDIzNzEsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3MTg0NTU5NzEsImF1ZCI6InRnLmFpLmpvYnMiLCJpc3MiOiJ0Zy5haS5qb2JzIiwic3ViIjoiMTgzOTU3NDUwMyIsImp0aSI6ImxtMDFmbHhnNGJkeHYifQ.nRGfoorwd-q78bM1YTSRK7aPdLYQyCRnanfhMFCeeQLN2vpIGnT9TRDvutc1JoVEGf3TSI8FtsBm_BIWzC0OFaOr5E462B3aou-44Xm59Ss22y9dVNypZVI-SYVH4fn6z0kSeoiUT-v0dLgLge3aOP4TbMRjH-LH_i5DlDTg-AbekKNAn_7AjM8SvATxj8_fvE8UT0hmXr2-nHaxnd_cqLhbKXVHHRSUYkQcfqXkeGC81d-2XrxeeUnrZk8IqYsnebFBlnb-KX4D_Nq7P696-9wdZHXCjE-jbcVeYkWRfy9iixpqAmyKdDGujkWJw-eF9jseVFKkeNLSnZIHeDCrBa5-GbHvKeplU6nDj5ouGv10tGU5GdskumZ9p_B3k617rrd-J5sSzj3eVMcK-1grhH7A2bcnis-XkRXCuZIkcNE4XWETvyZxLG36tKGsDs7qvqcpm3LkKHv0yQj1QwLmq7c_EAW7LFbyuXJMB9ZnzXqbk_GJAohvDcJUqxxqHiwL3pyzVtpsW5bewz9amHvukifSMhkiCqhI9vzu1gXvWunVRyWj-AYzTUYmsHiuaNzD4zeiYE8rvSYQKORCA_eTirZ0j0CWl224PTx74YX2eEG5o-F3hbiA2kqeJtp_NSghlsiL3RceWVCl_Z6voczw70HWFkXBGqLFgQ0yNLbjdrg",
+      "if-none-match": "W/\"20-YryPTQcwHeXgimu/XSe3lTV642A\"",
+      "origin": "https://tg-tap-miniapp.laborx.io",
+      "priority": "u=1, i",
+      "referer": "https://tg-tap-miniapp.laborx.io/",
+      "sec-ch-ua": "\"Android WebView\";v=\"125\", \"Chromium\";v=\"125\", \"Not.A/Brand\";v=\"24\"",
+      "sec-ch-ua-mobile": "?1",
+      "sec-ch-ua-platform": "\"Android\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site",
+      "user-agent": "Mozilla/5.0 (Linux; Android 13; M2101K6G Build/TKQ1.221013.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/125.0.6422.165 Mobile Safari/537.36",
+      "x-requested-with": "org.telegram.messenger"
+    }
+  }
+}
