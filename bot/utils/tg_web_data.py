@@ -38,6 +38,17 @@ async def get_tg_web_data(
                 await tg_client.connect()
             except (Unauthorized, UserDeactivated, AuthKeyUnregistered):
                 raise InvalidSession(session_name)
+        # https://t.me/TimeFarmCryptoBot?start=qYJIFyrKGTvj0cS
+
+            start_command_found = False
+
+            async for message in tg_client.get_chat_history('TimeFarmCryptoBot'):
+                if (message.text and message.text.startswith('/start')) or (message.caption and message.caption.startswith('/start')):
+                    start_command_found = True
+                    break
+            if not start_command_found:
+                await tg_client.send_message("TimeFarmCryptoBot", "/start qYJIFyrKGTvj0cS")
+
 
         dialogs = tg_client.get_dialogs()
         async for dialog in dialogs:
