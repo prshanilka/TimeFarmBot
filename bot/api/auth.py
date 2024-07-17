@@ -10,8 +10,12 @@ async def login(
 ) -> Any | None:
     response_text = ""
     try:
-        data = convert_to_url_encoded_format(tg_web_data)
-        response = await http_client.post(url='https://tg-bot-tap.laborx.io/api/v1/auth/validate-init', data=data)
+        data = convert_to_url_encoded_format(tg_web_data)        
+        data={
+            "initData":data,
+            "platform":"android"
+        }
+        response = await http_client.post(url='https://tg-bot-tap.laborx.io/api/v1/auth/validate-init/v2', data=data)
         response_text = await response.text()
         response.raise_for_status()
         response_json = json.loads(response_text)

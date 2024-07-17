@@ -4,6 +4,7 @@ import math
 from random import randint
 from time import time
 from datetime import datetime, timedelta, timezone
+from bot.api.http import handle_error, make_post_request
 
 import aiohttp
 from aiohttp_proxy import ProxyConnector
@@ -11,7 +12,7 @@ from bot.api.auth import login
 from bot.api.farm import claim_farm, start_farm
 from bot.api.info import get_info
 from pyrogram import Client
-
+import json
 from bot.config import settings
 from bot.utils.logger import logger
 from bot.exceptions import InvalidSession
@@ -26,6 +27,33 @@ class Tapper:
         self.session_name = tg_client.name
         self.tg_client = tg_client
 
+    async def get_task_list(self,http_client: aiohttp.ClientSession,) -> list:
+        res=await http_client.get(url="https://tg-bot-tap.laborx.io/api/v1/tasks")
+        response_text = await res.text()
+        response_json = json.loads(response_text)
+        task_list=[]
+        for i in response_json:
+            # if 'submission' not in i:
+            task_list.append(i['id'])
+        logger.info(task_list)
+        return task_list
+    async def submit_claim(self,http_client: aiohttp.ClientSession,task_list :list ) -> None:
+        if '668fbec8647177930d0ac0bc' in task_list:
+            bind_wallet_url=f'https://tg-bot-tap.laborx.io/api/v1/me/ton/info'
+            wallet_json= {"address":"UQAatGc8y2TtYjnSxb1jaCstvo4HdDAyIGv6G05Bncfl5lPH"}
+            res =  await make_post_request(http_client,bind_wallet_url,wallet_json,"钱包信息更新")
+        for i in task_list:
+            sub_url = f'https://tg-bot-tap.laborx.io/api/v1/tasks/{i}/submissions'
+            claim_url2 = f'https://tg-bot-tap.laborx.io/api/v1/tasks/{i}/claims'
+            res = await http_client.post(url=sub_url,json={})
+            text=res.text()
+            logger.info(text)
+            # if "OK" in text or res.status ==400:
+            response2_json =  await http_client.post(
+                url=claim_url2,
+                json={})
+            logger.info(response2_json.text())
+        return None   
     async def run(self, proxy: str | None) -> None:
         token = ""
         sleep_time=0
@@ -88,10 +116,10 @@ class Tapper:
                             f"{self.session_name} | Failed to fetch token | Sleeping for 60s")
                         await asyncio.sleep(delay=60)
                         continue
-
-
                 info = await get_info(http_client=http_client)
-
+                task_list=await self.get_task_list(http_client=http_client)
+                if len(task_list)>1:
+                    await self.submit_claim(task_list=task_list,http_client=http_client)
                 if info.get("activeFarmingStartedAt") is None:
                     f_info = await start_farm(http_client=http_client)
                     sleep_time= f_info.get("farmingDurationInSec")
@@ -145,3 +173,4 @@ async def run_tapper(tg_client: Client, proxy: str | None):
         await Tapper(tg_client=tg_client).run(proxy=proxy)
     except InvalidSession:
         logger.error(f'{tg_client.name} | Invalid Session')
+
